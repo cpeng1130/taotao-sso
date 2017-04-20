@@ -1,5 +1,8 @@
 package com.taotao.sso.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,41 +14,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.utils.TaotaoResult;
-import com.taotao.pojo.TbUser;
-import com.taotao.sso.service.RegisterService;
+import com.taotao.sso.service.LoginService;
 
 @Controller
-@RequestMapping("/user")
-public class RegisterController {
+public class LoginController {
 
 	@Autowired
-	private RegisterService registerService;
+	private LoginService loginService;
 	
-	@RequestMapping("/check/{param}/{type}")
+	@RequestMapping(value="/user/login",method=RequestMethod.POST)
 	@ResponseBody
-	public Object checkData(@PathVariable String param, @PathVariable Integer type,String callback){
-		
+	public TaotaoResult login(String username ,String password, HttpServletRequest request,HttpServletResponse response){
 		try{
-			TaotaoResult result = registerService.checkData(param, type);
-			if(StringUtils.isNotBlank(callback)){
-				MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
-				mappingJacksonValue.setJsonpFunction(callback);
-				return mappingJacksonValue;
-			}
+			TaotaoResult result = loginService.login(username, password, request, response);
 			return result;
-		
-			
-		}catch(Exception e){
+		}catch(Exception e ){
 			e.printStackTrace();
 			return TaotaoResult.build(500, ExceptionUtils.getStackTrace(e));
 		}
+		
 	}
-	
-	@RequestMapping(value="/register",method=RequestMethod.POST)
+	@RequestMapping("/user/token/{token}")
 	@ResponseBody
-	public TaotaoResult register(TbUser user){
+	public Object getgetUserByToken(@PathVariable String token,String callback){
 		try{
-			TaotaoResult result = registerService.register(user);
+			TaotaoResult result = loginService.getUserByToken(token);
+			if(StringUtils.isNotBlank(callback)){
+				MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
+				mappingJacksonValue.setJsonpFunction(callback);
+				return mappingJacksonValue;	
+			}
 			return result;
 		}catch(Exception e ){
 			e.printStackTrace();

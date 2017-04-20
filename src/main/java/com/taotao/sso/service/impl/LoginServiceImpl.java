@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,19 @@ public class LoginServiceImpl implements LoginService{
 		// cookie
 		CookieUtils.setCookie(request, response, "TT_TOKEN", token);
 		return TaotaoResult.ok(token);
+	}
+	@Override
+	public TaotaoResult getUserByToken(String token) {
+		String json = jedisClient.get(REDIS_SESSION_KEY+":"+token);
+		
+		if(StringUtils.isBlank(json)){
+			return TaotaoResult.build(400, "Session was expired");
+		}
+		TbUser user = JsonUtils.jsonToPojo(json, TbUser.class);
+		
+		user.setPassword(null);
+		jedisClient.expire(REDIS_SESSION_KEY+":"+token, SESSION_EXPIRE);
+		return TaotaoResult.ok(user);
 	}
 
 }
