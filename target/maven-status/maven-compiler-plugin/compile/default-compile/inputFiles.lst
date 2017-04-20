@@ -2,6 +2,7 @@ E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\component\imp
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\service\impl\RegisterServiceImpl.java
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\component\impl\JedisClientCluster.java
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\controller\LoginController.java
+E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\controller\PageController.java
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\controller\RegisterController.java
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\service\impl\LoginServiceImpl.java
 E:\Program\Java-SSM\TaoTao\taotao-sso\src\main\java\com\taotao\sso\service\LoginService.java

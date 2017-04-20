@@ -6,4 +6,5 @@ com\taotao\sso\controller\LoginController.class
 com\taotao\sso\controller\RegisterController.class
 com\taotao\sso\service\RegisterService.class
 com\taotao\sso\component\impl\JedisClientSingle.class
+com\taotao\sso\controller\PageController.class
 com\taotao\sso\service\LoginService.class

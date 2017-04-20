@@ -45,7 +45,8 @@ public class LoginServiceImpl implements LoginService{
 			return TaotaoResult.build(400, "username or password is invaild");
 		}
 		TbUser user = list.get(0);
-		if(user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
+	
+		if(!user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
 			return TaotaoResult.build(400, "username or password is invaild");
 		}
 		

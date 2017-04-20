@@ -182,7 +182,7 @@
 			});
 		},
 		login:function() {
-			 location.href = "/user/page/login";
+			 location.href = "/page/login";
 			 return false;
 		},
 		reg:function() {
